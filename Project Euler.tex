@@ -1,0 +1,1223 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Project Euler}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Project Euler (1-12)}\label{project-euler-1-12}
+
+    This is an attempt at solving the problems in
+\href{https://projecteuler.net/}{Project Euler}. They're described as "a
+series of challenging mathematical/computer programming problems that
+will require more than just mathematical insights to solve.". Being a
+mathematician myself, I thought it would be interesting to use these
+problems as fun brain teasers while also improving my Python. I can't
+guarantee that I will be right, but I will talk through my logic and
+give multiple solutions where I can to corroborate them.
+
+You'll also find I use "I" and "we" a lot and interchangeably. I do that
+out of habit and collaborative problem solving in classrooms. Hopefully
+it doesn't make this too annoying to read.
+
+    \subsubsection{\texorpdfstring{\href{https://projecteuler.net/problem=1}{Problem
+1 - Multiples of 3 and
+5}}{Problem 1 - Multiples of 3 and 5}}\label{problem-1---multiples-of-3-and-5}
+
+\textbf{If we list all the natural numbers below 10 that are multiples
+of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23. Find
+the sum of all the multiples of 3 or 5 below 1000.}
+
+    A Natural number is a "counting number" i.e. a positive whole number.
+Looking at this, there are a few ways to do it. I will look at two way a
+brute force approach and a sequence approach.
+
+    \emph{Method 1: Brute force}
+
+We use a for loop and add up every number less than 1000 that is a
+multiple of 3 or 5.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} If a number is a multiple of 3 or 5, then it is perfectly divisible by 3 or 5}
+        \PY{c+c1}{\PYZsh{} Thus, we take every number i less than 1000 and add it to our total if it is perfectly divible by 3 or 5. }
+        
+        \PY{n}{count}\PY{o}{=}\PY{l+m+mi}{0}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if} \PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{3}==0 or i\PYZpc{}5==0:
+                \PY{n}{count}\PY{o}{+}\PY{o}{=}\PY{n}{i}
+                
+        \PY{n}{count}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}1}]:} 233168
+\end{Verbatim}
+            
+    \emph{Method 2: Sequence Approach}
+
+Another way to think about this problem is that we are adding every 3rd
+and 5th number until we hit the limit value. Thus we can create 2
+sequences (a 3-step and 5-step sequence), amalgamate them and sum them.
+This avoids the use of a for loop and may (perhaps) perform better for a
+very large number. We create a function that does this instantaneously.
+Is this required? Definitely not, but why should that stop anything?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k}{def} \PY{n+nf}{fivethree}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} List outputs out all the elements in range as a list}
+            \PY{c+c1}{\PYZsh{} Set provides a unique list of elements}
+            \PY{c+c1}{\PYZsh{} Thus we create a list in multiples of 3 and 5 and use set to get a unique list}
+            \PY{k}{return}\PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{n}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{o}{+}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{n}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{fivethree}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+233168
+
+    \end{Verbatim}
+
+    We can see from above that both come to the answer \textbf{233168}. On
+to the next one!
+
+    \subsubsection{\texorpdfstring{\href{https://projecteuler.net/problem=2}{Problem
+2 - Even Fibonacci
+numbers}}{Problem 2 - Even Fibonacci numbers}}\label{problem-2---even-fibonacci-numbers}
+
+\textbf{Each new term in the Fibonacci sequence is generated by adding
+the previous two terms. By starting with 1 and 2, the first 10 terms
+will be:} \textbf{1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...} \textbf{By
+considering the terms in the Fibonacci sequence whose values do not
+exceed four million, find the sum of the even-valued terms.}
+
+    We can start by creating a function that creates a Fibonacci sequence,
+below a certain value. This will form the basis upon which we'll
+proceed.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k}{def} \PY{n+nf}{Fibo\PYZus{}Less}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+            \PY{n}{ans}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+            \PY{k}{while} \PY{n}{ans}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{+}\PY{n}{ans}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{n}{n}\PY{p}{:}
+                \PY{n}{ans}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{ans}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{+}\PY{n}{ans}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+            \PY{k}{return}\PY{p}{(}\PY{n}{ans}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} We do a quick test to see that it works.}
+        \PY{n}{Fibo\PYZus{}Less}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+\end{Verbatim}
+            
+    It looks like we have a candidate. Now we can apply a number of
+techniques to the Fibonacci sequence we've generated above. We'll try a
+couple here: Brute Force and patterns.
+
+    \emph{Method 1: Brute Force}
+
+Here we take each element in the Fibonacci sequence less than 4 million,
+check that they are divisible by 2 and add them together.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{count}\PY{o}{=}\PY{l+m+mi}{0}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{Fibo\PYZus{}Less}\PY{p}{(}\PY{l+m+mi}{4000000}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if} \PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2}==0:
+                \PY{n}{count}\PY{o}{+}\PY{o}{=}\PY{n}{i}
+        \PY{n}{count}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:} 4613732
+\end{Verbatim}
+            
+    \emph{Method 2: Number Patterns}
+
+    Let's take a look at the Fibonacci sequence below for numbers less than
+8000.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{Fibo\PYZus{}Less}\PY{p}{(}\PY{l+m+mi}{8000}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765]
+
+    \end{Verbatim}
+
+    Notice anything? There's clear pattern for which numbers are even or
+odd. Every third number is even which the other two are odd. Recall that
+the sum of an even number and an odd number is odd while the sum of two
+even numbers or two odd numbers is even. Thus we end up a pattern of
+\texttt{odd},
+\texttt{odd},\texttt{odd+odd=even},\texttt{even+odd=odd},\texttt{odd+even=odd},\texttt{odd+odd=even},...
+For those seeking a more mathematically rigid solution, You can find a
+discussion on an
+\href{https://math.stackexchange.com/questions/2386804/proof-that-every-third-fibonacci-number-is-even}{induction
+proof}
+
+Now we can simply sum every third element of our Fibonacci sequence and
+we will have a sum of the evens. The answer should be the same as our
+brute force solution.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{Fibo\PYZus{}Less}\PY{p}{(}\PY{l+m+mi}{4000000}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} This starts from 2 (the third element) and adds every third element}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} 4613732
+\end{Verbatim}
+            
+    Hence our solution is \textbf{4613732}. Great! Both methods match up.
+Let's move on the third problem.
+
+    \subsubsection{\texorpdfstring{\href{https://projecteuler.net/problem=3}{Problem
+3 -Largest prime
+factor}}{Problem 3 -Largest prime factor}}\label{problem-3--largest-prime-factor}
+
+\textbf{The prime factors of 13195 are 5, 7, 13 and 29. What is the
+largest prime factor of the number 600851475143 ?}
+
+    I'll try a brute force approach and then a slight modification to the
+brute force approach which should both result in the same answer.
+
+    \emph{Method 1: Brute Force}
+
+We create two functions here, one to check if a number is prime and
+another to find a numbers largest prime divisors.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} The largest possible prime divisor of a number other than the number itself is its square root }
+        
+        \PY{k}{def} \PY{n+nf}{is\PYZus{}prime}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+            \PY{n}{ans}\PY{o}{=}\PY{k+kc}{True}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{n+nb}{int}\PY{p}{(}\PY{n}{n}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if} \PY{n}{n}\PY{o}{\PYZpc{}}\PY{k}{i}==0:
+                    \PY{k}{return}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
+            \PY{k}{return}\PY{p}{(}\PY{n}{ans}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} We run these through to test}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{is\PYZus{}prime}\PY{p}{(}\PY{l+m+mi}{29}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{is\PYZus{}prime}\PY{p}{(}\PY{l+m+mi}{13}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{is\PYZus{}prime}\PY{p}{(}\PY{l+m+mi}{13195}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Looks like it works}
+        
+        \PY{k}{def} \PY{n+nf}{prime\PYZus{}div}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+            \PY{n}{ans}\PY{o}{=}\PY{l+m+mi}{1}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{n+nb}{int}\PY{p}{(}\PY{n}{n}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if} \PY{n}{n}\PY{o}{\PYZpc{}}\PY{k}{i}==0 and is\PYZus{}prime(i):
+                    \PY{n}{ans}\PY{o}{=}\PY{n}{i}
+            \PY{k}{if} \PY{n}{ans}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{:}
+                \PY{n}{ans}\PY{o}{=}\PY{n}{n}
+            \PY{k}{return}\PY{p}{(}\PY{n}{ans}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{prime\PYZus{}div}\PY{p}{(}\PY{l+m+mi}{13195}\PY{p}{)}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} We should get 29, which we did. Looks like it works.}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{prime\PYZus{}div}\PY{p}{(}\PY{l+m+mi}{600851475143}\PY{p}{)}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} We get 6857! }
+        
+        \PY{c+c1}{\PYZsh{} Will do a quick check to confirm that 6857 is prime}
+        \PY{n}{is\PYZus{}prime}\PY{p}{(}\PY{l+m+mi}{6857}\PY{p}{)} \PY{c+c1}{\PYZsh{} We get that it is in fact prime. Thus our answer is 6857}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+True
+True
+False
+29
+6857
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} True
+\end{Verbatim}
+            
+    \emph{Method 2: Modified Approach}
+
+We can do the same as before but employ a step up approach for the
+\texttt{prime\_div} step instead. That is, we start from 2 (the smallest
+prime) and keep dividing by 2 until the number is no longer divisible by
+2. We then move the quotient to the next highest prime continuously
+until we end at 1. The largest number that is able to divide our number
+is thus the answer.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k}{def} \PY{n+nf}{large\PYZus{}prime}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+            \PY{n}{ans}\PY{o}{=}\PY{n}{n}
+            
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{n+nb}{int}\PY{p}{(}\PY{n}{n}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                \PY{k}{while} \PY{n}{n}\PY{o}{\PYZpc{}}\PY{k}{i}==0:
+                    \PY{n}{n}\PY{o}{=}\PY{n}{n}\PY{o}{/}\PY{n}{i}
+                    \PY{n}{ans}\PY{o}{=}\PY{n}{i}
+                \PY{k}{if} \PY{n}{n}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{:}
+                    \PY{k}{break}
+            \PY{k}{return}\PY{p}{(}\PY{n}{ans}\PY{p}{)}
+        
+        \PY{n}{large\PYZus{}prime}\PY{p}{(}\PY{l+m+mi}{600851475143}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Looks like that works as well. On to the next one.}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} 6857
+\end{Verbatim}
+            
+    \subsubsection{\texorpdfstring{\href{https://projecteuler.net/problem=4}{Problem
+4 - Largest palindrome
+product}}{Problem 4 - Largest palindrome product}}\label{problem-4---largest-palindrome-product}
+
+\textbf{A palindromic number reads the same both ways. The largest
+palindrome made from the product of two 2-digit numbers is 9009 = 91 ×
+99.Find the largest palindrome made from the product of two 3-digit
+numbers.}
+
+    Let's create a function to check if a number is palindromic. There's
+perhaps a numerical test we can apply, but I'm going to do it in a way
+that seems obvious to me. Convert the number to text, reverse it and
+check that both are equal.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k}{def} \PY{n+nf}{is\PYZus{}pal}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{o}{==}\PY{n+nb}{str}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} We run through to test it\PYZsq{}s right}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{is\PYZus{}pal}\PY{p}{(}\PY{l+m+mi}{55155}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{is\PYZus{}pal}\PY{p}{(}\PY{l+m+mi}{551}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{is\PYZus{}pal}\PY{p}{(}\PY{l+m+mi}{202}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+True
+False
+True
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} We run a double loop from 999 to 100 and pick the largest number we find that is palindromic}
+         
+         \PY{n}{ans}\PY{o}{=}\PY{l+m+mi}{0}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{is\PYZus{}pal}\PY{p}{(}\PY{n}{i}\PY{o}{*}\PY{n}{j}\PY{p}{)} \PY{o+ow}{and} \PY{n}{i}\PY{o}{*}\PY{n}{j}\PY{o}{\PYZgt{}}\PY{n}{ans}\PY{p}{:}
+                     \PY{n}{ans}\PY{o}{=}\PY{n}{i}\PY{o}{*}\PY{n}{j}
+                     \PY{n}{I}\PY{o}{=}\PY{n}{i}
+                     \PY{n}{J}\PY{o}{=}\PY{n}{j}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{p}{[}\PY{n}{I}\PY{p}{,}\PY{n}{j}\PY{p}{,}\PY{n}{ans}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Largest Number is 906609}
+             
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[913, 999, 906609]
+
+    \end{Verbatim}
+
+    Hence our solution is \textbf{906609}
+
+    \subsubsection{\texorpdfstring{\href{https://projecteuler.net/problem=5}{Problem
+5 - Smallest
+multiple}}{Problem 5 - Smallest multiple}}\label{problem-5---smallest-multiple}
+
+\textbf{2520 is the smallest number that can be divided by each of the
+numbers from 1 to 10 without any remainder What is the smallest positive
+number that is evenly divisible by all of the numbers from 1 to 20?}
+
+    When I think of the smallest number that each of the numbers from 1 to
+10 can divide, I immediately think of prime numbers and exponents e.g.
+if a number is divisible by 4, it is divisible by 2 but a number
+divisible by 2 isn't necessarily divisible by 4.
+
+Every number can be expressed as a product of prime factors. The answer
+for 1 to 10 would be the product of each of the primes raised to the
+highest power that are less than 10. The primes below 10 are (2,3,5,7)
+with \(2^3=8\), \(3^2=9\), \(5^1=5\) and \(7^1=7\). Note that
+\(8*9*5*7=2520\)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} We will use the is\PYZus{}prime function we created earlier.}
+         \PY{n}{ans}\PY{o}{=}\PY{l+m+mi}{1}
+         \PY{k+kn}{from} \PY{n+nn}{math} \PY{k}{import} \PY{n}{log}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{21}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{is\PYZus{}prime}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{ans}\PY{o}{*}\PY{o}{=}\PY{n}{i}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}\PY{o}{/}\PY{n}{log}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{} I\PYZsq{}m calculating the floor of log(20) to base i.}
+                 \PY{c+c1}{\PYZsh{} This is the same as the highest power of i not greater than 20.}
+                 
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{ans}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+232792560
+
+    \end{Verbatim}
+
+    Hence our solution is \textbf{232792560}
+
+    \subsubsection{\texorpdfstring{\href{https://projecteuler.net/problem=6}{Problem
+6 - Sum square
+difference}}{Problem 6 - Sum square difference}}\label{problem-6---sum-square-difference}
+
+\textbf{The sum of the squares of the first ten natural numbers is,
+\(1^2 + 2^2 + ... + 10^2 = 385\). The square of the sum of the first ten
+natural numbers is, \((1 + 2 + ... + 10)^2 = 55^2 = 3025\). Hence the
+difference between the sum of the squares of the first ten natural
+numbers and the square of the sum is \(3025 − 385 = 2640\). Find the
+difference between the sum of the squares of the first one hundred
+natural numbers and the square of the sum.}
+
+    This seems relatvely straightforward. We can do this via list
+comprehenshions in Python. We create the squared list using a list
+comprehenshion.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} List of numbers from 1:100}
+         \PY{n}{nat}\PY{o}{=}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{101}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Use a list comprehenshion to create a list of squares.}
+         \PY{n}{nat2}\PY{o}{=}\PY{p}{[}\PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{nat}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} We do a quick check to see we have it right}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{nat}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{6}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{nat2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{6}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Calculating the difference between the sum of the squares \PYZhy{} square of the sum}
+         \PY{n}{ans}\PY{o}{=}\PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{nat}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{nat2}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{ans}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[0, 1, 2, 3, 4, 5]
+[0, 1, 4, 9, 16, 25]
+25164150
+
+    \end{Verbatim}
+
+    The answer is thus \textbf{25,164,150}
+
+    \subsubsection{\texorpdfstring{\href{https://projecteuler.net/problem=7}{Problem
+7 - 10001st
+prime}}{Problem 7 - 10001st prime}}\label{problem-7---10001st-prime}
+
+\textbf{By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13,
+we can see that the 6th prime is 13. What is the 10,001st prime number?}
+
+    Lets think about this. There's an obvious prime search approach so I
+will go in with that. There are few things we can do to avoid searching
+through many numbers. With the exception of 2, all primes are odd so we
+can start with 3 and move up in steps of 2
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} Let\PYZsq{}s create a function that outputs the nth prime. We will use our is\PYZus{}prime function again.}
+         \PY{k}{def} \PY{n+nf}{nth\PYZus{}prime}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{n}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{:}
+                 \PY{k}{return}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{k}{if} \PY{n}{n}\PY{o}{==}\PY{l+m+mi}{2}\PY{p}{:}
+                 \PY{k}{return}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+             \PY{n}{count}\PY{o}{=}\PY{l+m+mi}{2} \PY{c+c1}{\PYZsh{} The order of the prime}
+             \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{3} \PY{c+c1}{\PYZsh{} The latest number}
+             \PY{k}{while} \PY{n}{count}\PY{o}{\PYZlt{}}\PY{n}{n}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{is\PYZus{}prime}\PY{p}{(}\PY{n}{k}\PY{o}{+}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{count}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+                 \PY{n}{k}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{2}
+             \PY{k}{return}\PY{p}{(}\PY{n}{k}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Now let\PYZsq{}s test it.}
+         \PY{n}{nth\PYZus{}prime}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)} \PY{c+c1}{\PYZsh{} Should give us 13.}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} 13
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} Excellent so let\PYZsq{}s do it for our problem.}
+         \PY{n}{nth\PYZus{}prime}\PY{p}{(}\PY{l+m+mi}{10001}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} The answer is 104743}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} 104743
+\end{Verbatim}
+            
+    Hence our solution is \textbf{104743}
+
+    \subsubsection{\texorpdfstring{\href{https://projecteuler.net/problem=8}{Problem
+8 - Largest product in a
+series}}{Problem 8 - Largest product in a series}}\label{problem-8---largest-product-in-a-series}
+
+\textbf{The four adjacent digits in the 1000-digit number that have the
+greatest product are 9 × 9 × 8 × 9 = 5832}
+
+73167176531330624919225119674426574742355349194934
+96983520312774506326239578318016984801869478851843
+85861560789112949495459501737958331952853208805511
+12540698747158523863050715693290963295227443043557
+66896648950445244523161731856403098711121722383113
+62229893423380308135336276614282806444486645238749
+30358907296290491560440772390713810515859307960866
+70172427121883998797908792274921901699720888093776
+65727333001053367881220235421809751254540594752243
+52584907711670556013604839586446706324415722155397
+53697817977846174064955149290862569321978468622482
+83972241375657056057490261407972968652414535100474
+82166370484403199890008895243450658541227588666881
+16427171479924442928230863465674813919123162824586
+17866458359124566529476545682848912883142607690042
+24219022671055626321111109370544217506941658960408
+07198403850962455444362981230987879927244284909188
+84580156166097919133875499200524063689912560717606
+05886116467109405077541002256983155200055935729725
+71636269561882670428252483600823257530420752963450
+
+\textbf{Find the thirteen adjacent digits in the 1000-digit number that
+have the greatest product. What is the value of this product?}
+
+    Ok, this looks like another straightfoward one. I'll create a function
+that searches through the large number, calculates the products and
+returns the group with the largest product
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} First we load in the number. That in itself required some effort :)}
+         
+         \PY{n}{y}\PY{o}{=}\PY{l+m+mi}{7316717653133062491922511967442657474235534919493496983520312774506326239578318016984801869478851843858615607891129494954595017379583319528532088055111254069874715852386305071569329096329522744304355766896648950445244523161731856403098711121722383113622298934233803081353362766142828064444866452387493035890729629049156044077239071381051585930796086670172427121883998797908792274921901699720888093776657273330010533678812202354218097512545405947522435258490771167055601360483958644670632441572215539753697817977846174064955149290862569321978468622482839722413756570560574902614079729686524145351004748216637048440319989000889524345065854122758866688116427171479924442928230863465674813919123162824586178664583591245665294765456828489128831426076900422421902267105562632111110937054421750694165896040807198403850962455444362981230987879927244284909188845801561660979191338754992005240636899125607176060588611646710940507754100225698315520005593572972571636269561882670428252483600823257530420752963450}
+         
+         \PY{k+kn}{from} \PY{n+nn}{numpy} \PY{k}{import} \PY{n}{product}
+         \PY{k}{def} \PY{n+nf}{big\PYZus{}prod}\PY{p}{(}\PY{n}{y}\PY{p}{,}\PY{n}{k}\PY{p}{)}\PY{p}{:}    
+             \PY{c+c1}{\PYZsh{} y is the large number, k is the number of adjacent digits}
+             \PY{n}{ans}\PY{o}{=}\PY{l+m+mi}{0} \PY{c+c1}{\PYZsh{} initialise the answer at zero}
+             
+             \PY{c+c1}{\PYZsh{} Convert the number to string and treat it that way}
+             \PY{n}{y\PYZus{}str}\PY{o}{=}\PY{n+nb}{str}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+             \PY{n}{n}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{y\PYZus{}str}\PY{p}{)}
+             \PY{n}{nums}\PY{o}{=}\PY{n+nb}{list}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}}\PY{o}{*}\PY{n}{k}\PY{p}{)}
+             
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{o}{\PYZhy{}}\PY{n}{k}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} Select a window of k digits with convert it to a list of string}
+                 \PY{n}{m}\PY{o}{=}\PY{n+nb}{list}\PY{p}{(}\PY{n}{y\PYZus{}str}\PY{p}{[}\PY{n}{i}\PY{p}{:}\PY{n}{i}\PY{o}{+}\PY{n}{k}\PY{p}{]}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{} Use a list comprehenshion to convert the list of string to a list of integers}
+                 \PY{n}{m1}\PY{o}{=}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{m}\PY{p}{]}
+                 \PY{c+c1}{\PYZsh{} Find the product of that string and compare}
+                 \PY{n}{m2}\PY{o}{=}\PY{n}{product}\PY{p}{(}\PY{n}{m1}\PY{p}{)}
+                 \PY{k}{if} \PY{n}{m2}\PY{o}{\PYZgt{}}\PY{n}{ans}\PY{p}{:}
+                     \PY{n}{nums}\PY{o}{=}\PY{n}{m}
+                     \PY{n}{ans}\PY{o}{=}\PY{n}{m2}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{ans}\PY{p}{)} \PY{c+c1}{\PYZsh{} Print the largest product}
+             \PY{k}{return}\PY{p}{(}\PY{n}{nums}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{big\PYZus{}prod}\PY{p}{(}\PY{n}{y}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+         \PY{n}{big\PYZus{}prod}\PY{p}{(}\PY{n}{y}\PY{p}{,}\PY{l+m+mi}{13}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+5832
+23514624000
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} ['5', '5', '7', '6', '6', '8', '9', '6', '6', '4', '8', '9', '5']
+\end{Verbatim}
+            
+    Hence our solution is \textbf{23514624000}
+
+    \subsubsection{\texorpdfstring{\href{https://projecteuler.net/problem=9}{Problem
+9 - Special Pythagorean
+triplet}}{Problem 9 - Special Pythagorean triplet}}\label{problem-9---special-pythagorean-triplet}
+
+\textbf{A Pythagorean triplet is a set of three natural numbers, a
+\textless{} b \textless{} c, for which, }
+
+\(a^2 + b^2 = c^2\) \textbf{For example,}
+\(3^2 + 4^2 = 9 + 16 = 25 = 5^2\).
+
+\textbf{There exists exactly one Pythagorean triplet for which a + b + c
+= 1000. Find the product abc.}
+
+    I imagine we can approach this algebraically. That's my first instinct.
+However this is a coding exercise so I'll get the solutions by brute
+force and then calculate their product. There is perhaps a smoother or
+snappier solution available however, this is how I thought to do it.
+
+We know that \(a < b < c\) , \(a + b + c = 1000\) and since they form
+the sum of any two sides has to be greater than the third
+\href{http://mathworld.wolfram.com/TriangleInequality.html}{Triangle
+Inequality}. Since \(b - a >= 1\), \(c - b >= 1\) therefore
+\(c - a >= 2\)
+
+Given the triangle inequality, we know that c can be no higher than 499
+Because of the conditions above, the most equitable division of sides is
+\(a=332\), \(b=333\), \(c=335\) And c can be no lower than 335 and a can
+be no higher 332.
+
+Hence we can run a double loop with a from 1 to 332, c from 335 to 500
+and subtract them from 1000 to find b. I will not include a break
+condition just in case there exists another pythagorean triplet that
+satisfies the conditions. I mean I know it says there's just one
+solution in the question - but you can't believe everything you're told
+can you?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{k}{for} \PY{n}{a} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{333}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{335}\PY{p}{,}\PY{l+m+mi}{500}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{b}\PY{o}{=}\PY{l+m+mi}{1000}\PY{o}{\PYZhy{}}\PY{n}{a}\PY{o}{\PYZhy{}}\PY{n}{c}
+                 \PY{k}{if} \PY{n}{a}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{+}\PY{n}{b}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{==}\PY{n}{c}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{:}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a = }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{a}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{, b = }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{b}\PY{p}{)}\PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ and c = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{c}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}} \PY{p}{)}
+                     \PY{n}{ans} \PY{o}{=} \PY{n}{a}\PY{o}{*}\PY{n}{b}\PY{o}{*}\PY{n}{c}
+                     
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{abc = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{ans}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+a = 200, b = 375 and c = 425.
+abc = 31875000
+
+    \end{Verbatim}
+
+    Hence our solution is \textbf{31875000}. I got a bit stuck on my
+theoretical solution for this problem and while it's interesting, I have
+had to move on from it in the interest of time. I looked online and
+found a solution on a site called
+\href{https://www.mathblog.dk/pythagorean-triplets/}{mathblog}. So have
+a look at that if you want to see a theoretical solution.
+
+    \subsubsection{\texorpdfstring{\href{https://projecteuler.net/problem=10}{Problem
+10 - Summation of
+primes}}{Problem 10 - Summation of primes}}\label{problem-10---summation-of-primes}
+
+\textbf{The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.}
+
+\textbf{Find the sum of all the primes below two million.}
+
+    Yet another prime number question. It's great because we can use the
+\texttt{is\_prime} function we created earlier. I think I'll make a
+modification of one the functions I created for an earlier problem.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{k}{def} \PY{n+nf}{prime\PYZus{}less}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+             \PY{n}{count}\PY{o}{=}\PY{l+m+mi}{0}
+             \PY{n}{primes}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{is\PYZus{}prime}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{count}\PY{o}{+}\PY{o}{=}\PY{n}{i}
+                     
+                     \PY{c+c1}{\PYZsh{} I created code to print the primes used}
+                     \PY{c+c1}{\PYZsh{} However, there are too many primes less than 2 million (duh)}
+                     \PY{c+c1}{\PYZsh{} So printing is perhaps not the answer. I\PYZsq{}ll only print if n \PYZlt{} 1000}
+                     \PY{c+c1}{\PYZsh{} but leave it here in case you  }
+                     \PY{k}{if} \PY{n}{i} \PY{o}{==} \PY{l+m+mi}{2}\PY{p}{:}
+                         \PY{n}{primes}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The sum is: 2}\PY{l+s+s1}{\PYZsq{}}
+                     \PY{k}{else}\PY{p}{:}
+                         \PY{n}{primes}\PY{o}{+}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ + }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+                     \PY{c+c1}{\PYZsh{}Let\PYZsq{}s print the primes being summed.}
+             \PY{k}{if} \PY{n}{n}\PY{o}{\PYZlt{}}\PY{l+m+mi}{1000}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{primes}\PY{p}{)}
+             \PY{k}{return}\PY{p}{(}\PY{n}{count}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{prime\PYZus{}less}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} Let\PYZsq{}s test it.}
+         \PY{c+c1}{\PYZsh{} It has worked for 10. So let\PYZsq{}s test it for two million}
+         
+         \PY{n}{prime\PYZus{}less}\PY{p}{(}\PY{l+m+mi}{2000000}\PY{p}{)} \PY{c+c1}{\PYZsh{} 2 million is a big number so the code takes a while to run. The solution is 142913828922}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The sum is: 2 + 3 + 5 + 7
+17
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} 142913828922
+\end{Verbatim}
+            
+    Hence our solution is \textbf{142913828922}
+
+    \subsubsection{\texorpdfstring{\href{https://projecteuler.net/problem=11}{Problem
+11 - Largest product in a
+grid}}{Problem 11 - Largest product in a grid}}\label{problem-11---largest-product-in-a-grid}
+
+** In the 20×20 grid below, four numbers along a diagonal line have been
+marked in red. **
+
+08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
+
+49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
+
+81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
+
+52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91
+
+22 31 16 71 51 67 63 89 41 92 36 54 22 40 40 28 66 33 13 80
+
+24 47 32 60 99 03 45 02 44 75 33 53 78 36 84 20 35 17 12 50
+
+32 98 81 28 64 23 67 10 26 38 40 67 59 54 70 66 18 38 64 70
+
+67 26 20 68 02 62 12 20 95 63 94 39 63 08 40 91 66 49 94 21
+
+24 55 58 05 66 73 99 26 97 17 78 78 96 83 14 88 34 89 63 72
+
+21 36 23 09 75 00 76 44 20 45 35 14 00 61 33 97 34 31 33 95
+
+78 17 53 28 22 75 31 67 15 94 03 80 04 62 16 14 09 53 56 92
+
+16 39 05 42 96 35 31 47 55 58 88 24 00 17 54 24 36 29 85 57
+
+86 56 00 48 35 71 89 07 05 44 44 37 44 60 21 58 51 54 17 58
+
+19 80 81 68 05 94 47 69 28 73 92 13 86 52 17 77 04 89 55 40
+
+04 52 08 83 97 35 99 16 07 97 57 32 16 26 26 79 33 27 98 66
+
+88 36 68 87 57 62 20 72 03 46 33 67 46 55 12 32 63 93 53 69
+
+04 42 16 73 38 25 39 11 24 94 72 18 08 46 29 32 40 62 76 36
+
+20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16
+
+20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
+
+01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48
+
+\textbf{The product of these numbers is 26 × 63 × 78 × 14 = 1788696.}
+
+\textbf{What is the greatest product of four adjacent numbers in the
+same direction (up, down, left, right, or diagonally) in the 20×20
+grid?}
+
+    There doesn't seem to be an analytical way of approaching this one. So
+we'll approach it by brute force. We'll load in the numbers as a numpy
+matrix and calculate
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{k+kn}{from} \PY{n+nn}{numpy} \PY{k}{import} \PY{n}{matrix}\PY{p}{,}\PY{n}{prod}
+         
+         \PY{n}{z1}\PY{o}{=}\PY{n}{matrix}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{22}\PY{p}{,}\PY{l+m+mi}{97}\PY{p}{,}\PY{l+m+mi}{38}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{75}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{78}\PY{p}{,}\PY{l+m+mi}{52}\PY{p}{,}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{77}\PY{p}{,}\PY{l+m+mi}{91}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{]}\PY{p}{,}
+         \PY{p}{[}\PY{l+m+mi}{49}\PY{p}{,}\PY{l+m+mi}{49}\PY{p}{,}\PY{l+m+mi}{99}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{,}\PY{l+m+mi}{17}\PY{p}{,}\PY{l+m+mi}{81}\PY{p}{,}\PY{l+m+mi}{18}\PY{p}{,}\PY{l+m+mi}{57}\PY{p}{,}\PY{l+m+mi}{60}\PY{p}{,}\PY{l+m+mi}{87}\PY{p}{,}\PY{l+m+mi}{17}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{,}\PY{l+m+mi}{98}\PY{p}{,}\PY{l+m+mi}{43}\PY{p}{,}\PY{l+m+mi}{69}\PY{p}{,}\PY{l+m+mi}{48}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{56}\PY{p}{,}\PY{l+m+mi}{62}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+         \PY{p}{[}\PY{l+m+mi}{81}\PY{p}{,}\PY{l+m+mi}{49}\PY{p}{,}\PY{l+m+mi}{31}\PY{p}{,}\PY{l+m+mi}{73}\PY{p}{,}\PY{l+m+mi}{55}\PY{p}{,}\PY{l+m+mi}{79}\PY{p}{,}\PY{l+m+mi}{14}\PY{p}{,}\PY{l+m+mi}{29}\PY{p}{,}\PY{l+m+mi}{93}\PY{p}{,}\PY{l+m+mi}{71}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{,}\PY{l+m+mi}{67}\PY{p}{,}\PY{l+m+mi}{53}\PY{p}{,}\PY{l+m+mi}{88}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{49}\PY{p}{,}\PY{l+m+mi}{13}\PY{p}{,}\PY{l+m+mi}{36}\PY{p}{,}\PY{l+m+mi}{65}\PY{p}{]}\PY{p}{,}
+         \PY{p}{[}\PY{l+m+mi}{52}\PY{p}{,}\PY{l+m+mi}{70}\PY{p}{,}\PY{l+m+mi}{95}\PY{p}{,}\PY{l+m+mi}{23}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{60}\PY{p}{,}\PY{l+m+mi}{11}\PY{p}{,}\PY{l+m+mi}{42}\PY{p}{,}\PY{l+m+mi}{69}\PY{p}{,}\PY{l+m+mi}{24}\PY{p}{,}\PY{l+m+mi}{68}\PY{p}{,}\PY{l+m+mi}{56}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{32}\PY{p}{,}\PY{l+m+mi}{56}\PY{p}{,}\PY{l+m+mi}{71}\PY{p}{,}\PY{l+m+mi}{37}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{36}\PY{p}{,}\PY{l+m+mi}{91}\PY{p}{]}\PY{p}{,}
+         \PY{p}{[}\PY{l+m+mi}{22}\PY{p}{,}\PY{l+m+mi}{31}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{71}\PY{p}{,}\PY{l+m+mi}{51}\PY{p}{,}\PY{l+m+mi}{67}\PY{p}{,}\PY{l+m+mi}{63}\PY{p}{,}\PY{l+m+mi}{89}\PY{p}{,}\PY{l+m+mi}{41}\PY{p}{,}\PY{l+m+mi}{92}\PY{p}{,}\PY{l+m+mi}{36}\PY{p}{,}\PY{l+m+mi}{54}\PY{p}{,}\PY{l+m+mi}{22}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{,}\PY{l+m+mi}{28}\PY{p}{,}\PY{l+m+mi}{66}\PY{p}{,}\PY{l+m+mi}{33}\PY{p}{,}\PY{l+m+mi}{13}\PY{p}{,}\PY{l+m+mi}{80}\PY{p}{]}\PY{p}{,}
+         \PY{p}{[}\PY{l+m+mi}{24}\PY{p}{,}\PY{l+m+mi}{47}\PY{p}{,}\PY{l+m+mi}{32}\PY{p}{,}\PY{l+m+mi}{60}\PY{p}{,}\PY{l+m+mi}{99}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{45}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{44}\PY{p}{,}\PY{l+m+mi}{75}\PY{p}{,}\PY{l+m+mi}{33}\PY{p}{,}\PY{l+m+mi}{53}\PY{p}{,}\PY{l+m+mi}{78}\PY{p}{,}\PY{l+m+mi}{36}\PY{p}{,}\PY{l+m+mi}{84}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{35}\PY{p}{,}\PY{l+m+mi}{17}\PY{p}{,}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{]}\PY{p}{,}
+         \PY{p}{[}\PY{l+m+mi}{32}\PY{p}{,}\PY{l+m+mi}{98}\PY{p}{,}\PY{l+m+mi}{81}\PY{p}{,}\PY{l+m+mi}{28}\PY{p}{,}\PY{l+m+mi}{64}\PY{p}{,}\PY{l+m+mi}{23}\PY{p}{,}\PY{l+m+mi}{67}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{26}\PY{p}{,}\PY{l+m+mi}{38}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{,}\PY{l+m+mi}{67}\PY{p}{,}\PY{l+m+mi}{59}\PY{p}{,}\PY{l+m+mi}{54}\PY{p}{,}\PY{l+m+mi}{70}\PY{p}{,}\PY{l+m+mi}{66}\PY{p}{,}\PY{l+m+mi}{18}\PY{p}{,}\PY{l+m+mi}{38}\PY{p}{,}\PY{l+m+mi}{64}\PY{p}{,}\PY{l+m+mi}{70}\PY{p}{]}\PY{p}{,}
+         \PY{p}{[}\PY{l+m+mi}{67}\PY{p}{,}\PY{l+m+mi}{26}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{68}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{62}\PY{p}{,}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{95}\PY{p}{,}\PY{l+m+mi}{63}\PY{p}{,}\PY{l+m+mi}{94}\PY{p}{,}\PY{l+m+mi}{39}\PY{p}{,}\PY{l+m+mi}{63}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{,}\PY{l+m+mi}{91}\PY{p}{,}\PY{l+m+mi}{66}\PY{p}{,}\PY{l+m+mi}{49}\PY{p}{,}\PY{l+m+mi}{94}\PY{p}{,}\PY{l+m+mi}{21}\PY{p}{]}\PY{p}{,}
+         \PY{p}{[}\PY{l+m+mi}{24}\PY{p}{,}\PY{l+m+mi}{55}\PY{p}{,}\PY{l+m+mi}{58}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{66}\PY{p}{,}\PY{l+m+mi}{73}\PY{p}{,}\PY{l+m+mi}{99}\PY{p}{,}\PY{l+m+mi}{26}\PY{p}{,}\PY{l+m+mi}{97}\PY{p}{,}\PY{l+m+mi}{17}\PY{p}{,}\PY{l+m+mi}{78}\PY{p}{,}\PY{l+m+mi}{78}\PY{p}{,}\PY{l+m+mi}{96}\PY{p}{,}\PY{l+m+mi}{83}\PY{p}{,}\PY{l+m+mi}{14}\PY{p}{,}\PY{l+m+mi}{88}\PY{p}{,}\PY{l+m+mi}{34}\PY{p}{,}\PY{l+m+mi}{89}\PY{p}{,}\PY{l+m+mi}{63}\PY{p}{,}\PY{l+m+mi}{72}\PY{p}{]}\PY{p}{,}
+         \PY{p}{[}\PY{l+m+mi}{21}\PY{p}{,}\PY{l+m+mi}{36}\PY{p}{,}\PY{l+m+mi}{23}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{,}\PY{l+m+mi}{75}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{76}\PY{p}{,}\PY{l+m+mi}{44}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{45}\PY{p}{,}\PY{l+m+mi}{35}\PY{p}{,}\PY{l+m+mi}{14}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{61}\PY{p}{,}\PY{l+m+mi}{33}\PY{p}{,}\PY{l+m+mi}{97}\PY{p}{,}\PY{l+m+mi}{34}\PY{p}{,}\PY{l+m+mi}{31}\PY{p}{,}\PY{l+m+mi}{33}\PY{p}{,}\PY{l+m+mi}{95}\PY{p}{]}\PY{p}{,}
+         \PY{p}{[}\PY{l+m+mi}{78}\PY{p}{,}\PY{l+m+mi}{17}\PY{p}{,}\PY{l+m+mi}{53}\PY{p}{,}\PY{l+m+mi}{28}\PY{p}{,}\PY{l+m+mi}{22}\PY{p}{,}\PY{l+m+mi}{75}\PY{p}{,}\PY{l+m+mi}{31}\PY{p}{,}\PY{l+m+mi}{67}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{94}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{80}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{62}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{14}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{,}\PY{l+m+mi}{53}\PY{p}{,}\PY{l+m+mi}{56}\PY{p}{,}\PY{l+m+mi}{92}\PY{p}{]}\PY{p}{,}
+         \PY{p}{[}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{39}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{42}\PY{p}{,}\PY{l+m+mi}{96}\PY{p}{,}\PY{l+m+mi}{35}\PY{p}{,}\PY{l+m+mi}{31}\PY{p}{,}\PY{l+m+mi}{47}\PY{p}{,}\PY{l+m+mi}{55}\PY{p}{,}\PY{l+m+mi}{58}\PY{p}{,}\PY{l+m+mi}{88}\PY{p}{,}\PY{l+m+mi}{24}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{17}\PY{p}{,}\PY{l+m+mi}{54}\PY{p}{,}\PY{l+m+mi}{24}\PY{p}{,}\PY{l+m+mi}{36}\PY{p}{,}\PY{l+m+mi}{29}\PY{p}{,}\PY{l+m+mi}{85}\PY{p}{,}\PY{l+m+mi}{57}\PY{p}{]}\PY{p}{,}
+         \PY{p}{[}\PY{l+m+mi}{86}\PY{p}{,}\PY{l+m+mi}{56}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{48}\PY{p}{,}\PY{l+m+mi}{35}\PY{p}{,}\PY{l+m+mi}{71}\PY{p}{,}\PY{l+m+mi}{89}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{44}\PY{p}{,}\PY{l+m+mi}{44}\PY{p}{,}\PY{l+m+mi}{37}\PY{p}{,}\PY{l+m+mi}{44}\PY{p}{,}\PY{l+m+mi}{60}\PY{p}{,}\PY{l+m+mi}{21}\PY{p}{,}\PY{l+m+mi}{58}\PY{p}{,}\PY{l+m+mi}{51}\PY{p}{,}\PY{l+m+mi}{54}\PY{p}{,}\PY{l+m+mi}{17}\PY{p}{,}\PY{l+m+mi}{58}\PY{p}{]}\PY{p}{,}
+         \PY{p}{[}\PY{l+m+mi}{19}\PY{p}{,}\PY{l+m+mi}{80}\PY{p}{,}\PY{l+m+mi}{81}\PY{p}{,}\PY{l+m+mi}{68}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{94}\PY{p}{,}\PY{l+m+mi}{47}\PY{p}{,}\PY{l+m+mi}{69}\PY{p}{,}\PY{l+m+mi}{28}\PY{p}{,}\PY{l+m+mi}{73}\PY{p}{,}\PY{l+m+mi}{92}\PY{p}{,}\PY{l+m+mi}{13}\PY{p}{,}\PY{l+m+mi}{86}\PY{p}{,}\PY{l+m+mi}{52}\PY{p}{,}\PY{l+m+mi}{17}\PY{p}{,}\PY{l+m+mi}{77}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{89}\PY{p}{,}\PY{l+m+mi}{55}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{]}\PY{p}{,}
+         \PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{52}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{83}\PY{p}{,}\PY{l+m+mi}{97}\PY{p}{,}\PY{l+m+mi}{35}\PY{p}{,}\PY{l+m+mi}{99}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{97}\PY{p}{,}\PY{l+m+mi}{57}\PY{p}{,}\PY{l+m+mi}{32}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{26}\PY{p}{,}\PY{l+m+mi}{26}\PY{p}{,}\PY{l+m+mi}{79}\PY{p}{,}\PY{l+m+mi}{33}\PY{p}{,}\PY{l+m+mi}{27}\PY{p}{,}\PY{l+m+mi}{98}\PY{p}{,}\PY{l+m+mi}{66}\PY{p}{]}\PY{p}{,}
+         \PY{p}{[}\PY{l+m+mi}{88}\PY{p}{,}\PY{l+m+mi}{36}\PY{p}{,}\PY{l+m+mi}{68}\PY{p}{,}\PY{l+m+mi}{87}\PY{p}{,}\PY{l+m+mi}{57}\PY{p}{,}\PY{l+m+mi}{62}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{72}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{46}\PY{p}{,}\PY{l+m+mi}{33}\PY{p}{,}\PY{l+m+mi}{67}\PY{p}{,}\PY{l+m+mi}{46}\PY{p}{,}\PY{l+m+mi}{55}\PY{p}{,}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{32}\PY{p}{,}\PY{l+m+mi}{63}\PY{p}{,}\PY{l+m+mi}{93}\PY{p}{,}\PY{l+m+mi}{53}\PY{p}{,}\PY{l+m+mi}{69}\PY{p}{]}\PY{p}{,}
+         \PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{42}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{73}\PY{p}{,}\PY{l+m+mi}{38}\PY{p}{,}\PY{l+m+mi}{25}\PY{p}{,}\PY{l+m+mi}{39}\PY{p}{,}\PY{l+m+mi}{11}\PY{p}{,}\PY{l+m+mi}{24}\PY{p}{,}\PY{l+m+mi}{94}\PY{p}{,}\PY{l+m+mi}{72}\PY{p}{,}\PY{l+m+mi}{18}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{46}\PY{p}{,}\PY{l+m+mi}{29}\PY{p}{,}\PY{l+m+mi}{32}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{,}\PY{l+m+mi}{62}\PY{p}{,}\PY{l+m+mi}{76}\PY{p}{,}\PY{l+m+mi}{36}\PY{p}{]}\PY{p}{,}
+         \PY{p}{[}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{69}\PY{p}{,}\PY{l+m+mi}{36}\PY{p}{,}\PY{l+m+mi}{41}\PY{p}{,}\PY{l+m+mi}{72}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mi}{23}\PY{p}{,}\PY{l+m+mi}{88}\PY{p}{,}\PY{l+m+mi}{34}\PY{p}{,}\PY{l+m+mi}{62}\PY{p}{,}\PY{l+m+mi}{99}\PY{p}{,}\PY{l+m+mi}{69}\PY{p}{,}\PY{l+m+mi}{82}\PY{p}{,}\PY{l+m+mi}{67}\PY{p}{,}\PY{l+m+mi}{59}\PY{p}{,}\PY{l+m+mi}{85}\PY{p}{,}\PY{l+m+mi}{74}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{36}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{]}\PY{p}{,}
+         \PY{p}{[}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{73}\PY{p}{,}\PY{l+m+mi}{35}\PY{p}{,}\PY{l+m+mi}{29}\PY{p}{,}\PY{l+m+mi}{78}\PY{p}{,}\PY{l+m+mi}{31}\PY{p}{,}\PY{l+m+mi}{90}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{74}\PY{p}{,}\PY{l+m+mi}{31}\PY{p}{,}\PY{l+m+mi}{49}\PY{p}{,}\PY{l+m+mi}{71}\PY{p}{,}\PY{l+m+mi}{48}\PY{p}{,}\PY{l+m+mi}{86}\PY{p}{,}\PY{l+m+mi}{81}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{23}\PY{p}{,}\PY{l+m+mi}{57}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{54}\PY{p}{]}\PY{p}{,}
+         \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{70}\PY{p}{,}\PY{l+m+mi}{54}\PY{p}{,}\PY{l+m+mi}{71}\PY{p}{,}\PY{l+m+mi}{83}\PY{p}{,}\PY{l+m+mi}{51}\PY{p}{,}\PY{l+m+mi}{54}\PY{p}{,}\PY{l+m+mi}{69}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{92}\PY{p}{,}\PY{l+m+mi}{33}\PY{p}{,}\PY{l+m+mi}{48}\PY{p}{,}\PY{l+m+mi}{61}\PY{p}{,}\PY{l+m+mi}{43}\PY{p}{,}\PY{l+m+mi}{52}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{89}\PY{p}{,}\PY{l+m+mi}{19}\PY{p}{,}\PY{l+m+mi}{67}\PY{p}{,}\PY{l+m+mi}{48}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{max\PYZus{}prod}\PY{o}{=}\PY{l+m+mi}{0}
+         \PY{n}{indices}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}
+         \PY{c+c1}{\PYZsh{} we perform a horizontal, vertical and diagonal check}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} Vertical check}
+                 \PY{k}{if} \PY{n}{i} \PY{o}{\PYZlt{}} \PY{l+m+mi}{16}\PY{p}{:}
+                     \PY{k}{if} \PY{n}{z1}\PY{p}{[}\PY{n}{i}\PY{p}{:}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,}\PY{n}{j}\PY{p}{]}\PY{o}{.}\PY{n}{prod}\PY{p}{(}\PY{p}{)}\PY{o}{\PYZgt{}}\PY{n}{max\PYZus{}prod}\PY{p}{:}
+                         \PY{n}{max\PYZus{}prod}\PY{o}{=}\PY{n}{z1}\PY{p}{[}\PY{n}{i}\PY{p}{:}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,}\PY{n}{j}\PY{p}{]}\PY{o}{.}\PY{n}{prod}\PY{p}{(}\PY{p}{)}
+                         \PY{n}{indices}\PY{o}{=}\PY{n+nb}{str}\PY{p}{(}\PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ , }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{j}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ , }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{j}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ , }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{3}\PY{p}{,}\PY{n}{j}\PY{p}{)}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} Horizontal check}
+                 \PY{k}{if} \PY{n}{j} \PY{o}{\PYZlt{}} \PY{l+m+mi}{16}\PY{p}{:}
+                     \PY{k}{if} \PY{n}{z1}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{:}\PY{p}{(}\PY{n}{j}\PY{o}{+}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{prod}\PY{p}{(}\PY{p}{)}\PY{o}{\PYZgt{}}\PY{n}{max\PYZus{}prod}\PY{p}{:}
+                         \PY{n}{max\PYZus{}prod}\PY{o}{=}\PY{n}{z1}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{:}\PY{p}{(}\PY{n}{j}\PY{o}{+}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{prod}\PY{p}{(}\PY{p}{)}
+                         \PY{n}{indices}\PY{o}{=}\PY{n+nb}{str}\PY{p}{(}\PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ , }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ , }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{o}{+}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ , }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{o}{+}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+         
+                  \PY{c+c1}{\PYZsh{} Diagonal check}
+                 \PY{k}{if} \PY{p}{(}\PY{n}{j} \PY{o}{\PYZlt{}} \PY{l+m+mi}{16}\PY{p}{)} \PY{o+ow}{and} \PY{p}{(}\PY{n}{i} \PY{o}{\PYZlt{}} \PY{l+m+mi}{16}\PY{p}{)}\PY{p}{:}
+                     \PY{c+c1}{\PYZsh{} Downward diagonal}
+                     \PY{k}{if} \PY{n}{z1}\PY{p}{[}\PY{n}{i}\PY{p}{:}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,}\PY{n}{j}\PY{p}{:}\PY{p}{(}\PY{n}{j}\PY{o}{+}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{diagonal}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{prod}\PY{p}{(}\PY{p}{)}\PY{o}{\PYZgt{}}\PY{n}{max\PYZus{}prod}\PY{p}{:}
+                         \PY{n}{max\PYZus{}prod}\PY{o}{=}\PY{n}{z1}\PY{p}{[}\PY{n}{i}\PY{p}{:}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,}\PY{n}{j}\PY{p}{:}\PY{p}{(}\PY{n}{j}\PY{o}{+}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{diagonal}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{prod}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} Product of the diagonal of the array}
+                         \PY{n}{indices}\PY{o}{=}\PY{n+nb}{str}\PY{p}{(}\PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ , }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{j}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ , }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{j}\PY{o}{+}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ , }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{3}\PY{p}{,}\PY{n}{j}\PY{o}{+}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+                 
+                     \PY{c+c1}{\PYZsh{} To find the other diagonal, we reverse the }
+                     \PY{c+c1}{\PYZsh{} Upward diagonal}
+                     \PY{k}{if} \PY{n}{z1}\PY{p}{[}\PY{n}{i}\PY{p}{:}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,}\PY{n}{j}\PY{p}{:}\PY{p}{(}\PY{n}{j}\PY{o}{+}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{diagonal}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{prod}\PY{p}{(}\PY{p}{)}\PY{o}{\PYZgt{}}\PY{n}{max\PYZus{}prod}\PY{p}{:}
+                         \PY{n}{max\PYZus{}prod}\PY{o}{=}\PY{n}{z1}\PY{p}{[}\PY{n}{i}\PY{p}{:}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,}\PY{n}{j}\PY{p}{:}\PY{p}{(}\PY{n}{j}\PY{o}{+}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{diagonal}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{prod}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} Product of the opposite diagonal of the array}
+                         \PY{n}{indices}\PY{o}{=}\PY{n+nb}{str}\PY{p}{(}\PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{o}{+}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ , }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{j}\PY{o}{+}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ , }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{j}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ , }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{3}\PY{p}{,}\PY{n}{j}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{indices}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{max\PYZus{}prod}\PY{p}{)}              
+                         
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(12, 6) , (13, 5) , (14, 4) , (15, 3)
+70600674
+
+    \end{Verbatim}
+
+    The solution is therefore \textbf{70600674} and while not asked to, I
+also printed out the solution cells: \textbf{(13, 7) , (14, 6) , (15, 5)
+and (16, 4)} (recall python indexing starts at zero).
+
+08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
+
+49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
+
+81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
+
+52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91
+
+22 31 16 71 51 67 63 89 41 92 36 54 22 40 40 28 66 33 13 80
+
+24 47 32 60 99 03 45 02 44 75 33 53 78 36 84 20 35 17 12 50
+
+32 98 81 28 64 23 67 10 26 38 40 67 59 54 70 66 18 38 64 70
+
+67 26 20 68 02 62 12 20 95 63 94 39 63 08 40 91 66 49 94 21
+
+24 55 58 05 66 73 99 26 97 17 78 78 96 83 14 88 34 89 63 72
+
+21 36 23 09 75 00 76 44 20 45 35 14 00 61 33 97 34 31 33 95
+
+78 17 53 28 22 75 31 67 15 94 03 80 04 62 16 14 09 53 56 92
+
+16 39 05 42 96 35 31 47 55 58 88 24 00 17 54 24 36 29 85 57
+
+86 56 00 48 35 71 \textbf{ 89 } 07 05 44 44 37 44 60 21 58 51 54 17 58
+
+19 80 81 68 05 \textbf{ 94 } 47 69 28 73 92 13 86 52 17 77 04 89 55 40
+
+04 52 08 83 \textbf{ 97 } 35 99 16 07 97 57 32 16 26 26 79 33 27 98 66
+
+88 36 68 \textbf{ 87 } 57 62 20 72 03 46 33 67 46 55 12 32 63 93 53 69
+
+04 42 16 73 38 25 39 11 24 94 72 18 08 46 29 32 40 62 76 36
+
+20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16
+
+20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
+
+01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48
+
+    \subsubsection{\texorpdfstring{\href{https://projecteuler.net/problem=12}{Problem
+12 - Highly divisible triangular
+number}}{Problem 12 - Highly divisible triangular number}}\label{problem-12---highly-divisible-triangular-number}
+
+\textbf{The sequence of triangle numbers is generated by adding the
+natural numbers. So the 7th triangle number would be 1 + 2 + 3 + 4 + 5 +
+6 + 7 = 28. The first ten terms would be:}
+
+\textbf{1, 3, 6, 10, 15, 21, 28, 36, 45, 55, ...}
+
+\textbf{Let us list the factors of the first seven triangle numbers:}
+
+1: 1
+
+3: 1,3
+
+6: 1,2,3,6
+
+10: 1,2,5,10
+
+15: 1,3,5,15
+
+21: 1,3,7,21
+
+28: 1,2,4,7,14,28
+
+\textbf{We can see that 28 is the first triangle number to have over
+five divisors.}
+
+\textbf{What is the value of the first triangle number to have over five
+hundred divisors?}
+
+    Ok, let's brute-ish force this one first and then see if we can think of
+a more interesting solution. This will be the last one I do in this part
+(12 seems like a sensible number to pause at).
+
+Mathematically speaking, this is an
+\href{https://en.wikipedia.org/wiki/Arithmetic_progression}{arithmetic
+progression}. As shown in the derivation, we can represent the nth
+triangular number as: \[Tri(n)=\frac{n(n+1)}{2} \]
+
+Now looking at the set up above, one of \(n\) and \(n+1\) will be even.
+So we find the divisors of \(n/2\) and \(n+1\) (or (n+1)/2 and n if n is
+odd). We then cross multiply both and the unique list will be all of the
+divisors.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{} First create a function to generate the nth triangle number}
+         \PY{k}{def} \PY{n+nf}{tri}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return}\PY{p}{(}\PY{l+m+mf}{0.5}\PY{o}{*}\PY{n}{n}\PY{o}{*}\PY{p}{(}\PY{n}{n}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Let\PYZsq{}s test this out.}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{tri}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{n}{tri}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{tri}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} Looks like it works}
+         
+         \PY{c+c1}{\PYZsh{} Now let\PYZsq{}s create a function that creates a tuple of the divisors}
+         \PY{k}{def} \PY{n+nf}{divs}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} We know that automatically, we have 1 and the number k}
+             \PY{n}{nums}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{p}{]}
+             
+             \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{n+nb}{int}\PY{p}{(}\PY{n}{k}\PY{o}{*}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{k}\PY{o}{\PYZpc{}}\PY{k}{j}==0:
+                     \PY{n}{nums}\PY{o}{=}\PY{n}{nums}\PY{o}{+}\PY{p}{[}\PY{n}{j}\PY{p}{,}\PY{p}{]}
+             
+             \PY{n}{nums}\PY{o}{=}\PY{n}{nums}\PY{o}{+}\PY{p}{[}\PY{n}{k}\PY{p}{,}\PY{p}{]}
+             \PY{k}{return}\PY{p}{(}\PY{n}{nums}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Test for 15. }
+         \PY{n}{divs}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{)} \PY{c+c1}{\PYZsh{} Looks like it works}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1.0 3.0 6.0
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} [1, 3, 5, 15]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{} We know the 7th triangular number is 28 so we\PYZsq{}ll start from the 8th}
+         \PY{c+c1}{\PYZsh{} n/2 is even, k\PYZus{}even=n/2 else, k\PYZus{}odd=n/2}
+         
+         \PY{n}{n}\PY{o}{=}\PY{l+m+mi}{7}
+         \PY{n}{m}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{divs}\PY{p}{(}\PY{n}{tri}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{k}{while} \PY{n}{m}\PY{o}{\PYZlt{}}\PY{l+m+mi}{501}\PY{p}{:}
+             \PY{n}{n}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+             \PY{k}{if} \PY{n}{n}\PY{o}{\PYZpc{}}\PY{k}{2}==0:
+                 \PY{n}{k\PYZus{}even}\PY{p}{,}\PY{n}{k\PYZus{}odd}\PY{o}{=}\PY{n}{n}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,}\PY{p}{(}\PY{n}{n}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{k\PYZus{}even}\PY{p}{,}\PY{n}{k\PYZus{}odd}\PY{o}{=}\PY{p}{(}\PY{n}{n}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{n}
+                 
+             \PY{n}{t1}\PY{p}{,}\PY{n}{t2}\PY{o}{=}\PY{n}{divs}\PY{p}{(}\PY{n}{k\PYZus{}even}\PY{p}{)}\PY{p}{,}\PY{n}{divs}\PY{p}{(}\PY{n}{k\PYZus{}odd}\PY{p}{)}
+             \PY{n}{t3}\PY{o}{=}\PY{n+nb}{set}\PY{p}{(}\PY{p}{[}\PY{n}{x}\PY{o}{*}\PY{n}{y} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{t1} \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{n}{t2}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} Multiply all the elements together using a list comprehenshion}
+             \PY{c+c1}{\PYZsh{} Get a unique list of them using set.}
+             \PY{n}{m}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{t3}\PY{p}{)}
+             
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{There are }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{m}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ divisors for }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{tri}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ the }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{th triangular number.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 576 divisors for 76576500 the 12375th triangular number.
+
+    \end{Verbatim}
+
+    Hence our solution is \textbf{76576500}.
+
+    That's it from me for the first 12 problems. Thanks a lot for reading.
+Please let me know if you spot any errors or have any suggestions. I'm
+also grateful for any feedback.
+
+Thanks!
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
